@@ -1,0 +1,16 @@
+.input-form-btn-group {
+    display: flex;
+    justify-content: space-between;
+    padding-top:15px
+  }
+  .btn-inputSuccess{
+    background-color: #4aaa9a !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  .btn-inputCancel{
+    background-color: white !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    color:black !important;
+  }

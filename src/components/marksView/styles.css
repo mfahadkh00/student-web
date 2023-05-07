@@ -1,0 +1,108 @@
+.summaryBoxInner {
+  width: 146px;
+  height: 99px;
+  position: relative;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.summaryBoxText {
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 13px;
+  width: 100%;
+  font-weight: normal;
+  font-size: 14px;
+  opacity: 1;
+  text-align: center;
+}
+.summaryBoxSubtext {
+  width: 100%;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 49px;
+  font-weight: bolder;
+  font-size: 22px;
+  opacity: 1;
+  text-align: center;
+}
+
+.white-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.main-heading {
+  font-size: 24px;
+  color: black;
+  margin: 20px;
+  font-weight: bolder;
+}
+
+.sub-heading {
+  font-size: 18px;
+  color: #2e3136;
+  margin: 10px;
+  font-weight: 575;
+}
+
+.text {
+  font-size: 16px;
+  color: #343744;
+  font-weight: bolder;
+}
+
+.gradeBox {
+  display: flex;
+  flex-direction: row;
+  max-width: 22px;
+  justify-content: space-around;
+  align-items: flex-start;
+  border-radius: 8px;
+  padding-top: 7px;
+  padding-right: 42px;
+  padding-bottom: 7px;
+  padding-left: 42px;
+  /* background-color: #fff7f5; */
+  /* color: #ffb59d; */
+  font-size: 16px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.gradeA {
+  background-color: #4bab9a;
+  color: #ffffff;
+}
+
+.gradeB {
+  background-color: #5894bf;
+  color: #ffffff;
+}
+
+.gradeC {
+  background-color: #ffb59e;
+  color: #686563;
+}
+.gradeD {
+  background-color: #686563;
+  color: #ffb59d;
+}
+.gradeF {
+  background-color: rgba(255, 104, 151, 0.5);
+  color: #ff3e00;
+}
+.timeStamp {
+  color: #798ba3;
+  font-size: 16px;
+}
+.btn-border {
+  border: 2px solid #ecf0f4;
+}
+.btn-border:hover {
+  background-color: #ecf0f4;
+}
