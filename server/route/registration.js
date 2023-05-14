@@ -51,14 +51,41 @@ router.post("/marks", async (req, res) => {
   const { title, obtainedMarks, totalMarks, registrationId } = req.body;
 
   try {
-    const registration = await Registration.findByIdAndUpdate(
+    let grade = "";
+    let registration = await Registration.findById(registrationId);
+    let obtainedMarksTotal = registration.marks.reduce(
+      (acc, cur) => acc + cur.obtainedMarks,
+      0
+    );
+    obtainedMarksTotal += obtainedMarks;
+    let marksTotal = registration.marks.reduce(
+      (acc, cur) => acc + cur.totalMarks,
+      0
+    );
+    marksTotal += totalMarks;
+    let percentage = (obtainedMarksTotal / marksTotal) * 100;
+
+    if (percentage >= 90) {
+      grade = "A";
+    } else if (percentage >= 80 && percentage < 90) {
+      grade = "B";
+    } else if (percentage >= 70 && percentage < 80) {
+      grade = "C";
+    } else if (percentage >= 50 && percentage < 70) {
+      grade = "D";
+    } else {
+      grade = "F";
+    }
+    registration = await Registration.findByIdAndUpdate(
       registrationId,
       {
         $push: { marks: { title, obtainedMarks, totalMarks } },
-        $inc: { grandTotal: obtainedMarks },
+        grandTotal: parseFloat(percentage.toFixed(2)),
+        grade,
       },
       { new: true }
     );
+    // await registration.updateOne({ grade, grandTotal });
     res.json(registration);
   } catch (err) {
     console.error(err);

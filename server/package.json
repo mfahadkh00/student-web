@@ -13,6 +13,6 @@
     "morgan": "~1.9.1"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "start": "nodemon index.js"
   }
 }
