@@ -13,14 +13,14 @@ const Header: React.FC<IHeaderProps> = (props) => {
         direction="horizontal"
         style={{ justifyContent: "space-between", margin: "20px" }}
       >
-        <div className="sub-heading">Students Summary</div>
+        <div className="sub-heading">Marks Summary</div>
         <div className="ml-auto">
           <button
             className="btn btn-border"
             style={{ float: "right", marginRight: "200px" }}
             onClick={() => props.setShow(true)}
           >
-            + Add Data
+            + Add Registration
           </button>
         </div>
       </Stack>

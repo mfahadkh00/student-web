@@ -1,27 +1,27 @@
 import { Action, PayloadAction, TypeConstant } from "typesafe-actions";
 import {
-  IStudentRaw,
+  IRegistrationRaw,
   IStudentState,
   StudentActionTypes,
 } from "state/ducks/students/types";
 
 export const initialState: IStudentState = {
   data: [],
-  errors: [],
+  error: [],
   loading: false,
 };
 
 export const studentReducer = (
   state: IStudentState = initialState,
   action: Action<TypeConstant> &
-    PayloadAction<TypeConstant, IStudentRaw | IStudentRaw[] | string>
+    PayloadAction<TypeConstant, IRegistrationRaw | IRegistrationRaw[] | string>
 ): IStudentState => {
   switch (action.type) {
     case StudentActionTypes.FETCH_STUDENTS: {
       return { ...state, loading: true };
     }
     case StudentActionTypes.FETCH_STUDENTS_SUCCESS: {
-      return { ...initialState, data: action.payload as IStudentRaw[] };
+      return { ...initialState, data: action.payload as IRegistrationRaw[] };
     }
     case StudentActionTypes.FETCH_STUDENTS_ERROR: {
       console.log("ERROR", action.payload);
@@ -34,7 +34,7 @@ export const studentReducer = (
     }
     case StudentActionTypes.ADD_STUDENT_SUCCESS: {
       const temp = [...state.data];
-      temp.push(action.payload as IStudentRaw);
+      temp.push(action.payload as IRegistrationRaw);
       return { ...initialState, data: temp };
     }
     case StudentActionTypes.ADD_STUDENT_ERROR: {
@@ -51,11 +51,11 @@ export const studentReducer = (
     }
     case StudentActionTypes.UPDATE_STUDENT_SUCCESS: {
       const temp = [...state.data];
-      const std = action.payload as IStudentRaw;
+      const std = action.payload as IRegistrationRaw;
       temp.splice(
         temp.findIndex((itx) => itx._id === std._id),
         1,
-        action.payload as IStudentRaw
+        action.payload as IRegistrationRaw
       );
 
       return {
@@ -76,7 +76,8 @@ export const studentReducer = (
     case StudentActionTypes.DELETE_STUDENT_SUCCESS: {
       return {
         ...state,
-        data: state.data.filter((itx) => itx._id !== action.payload),
+        data: state.data,
+        // .data.filter((itx) => itx._id !== action.payload),
         loading: false,
       };
     }

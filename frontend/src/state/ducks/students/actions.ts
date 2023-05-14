@@ -1,35 +1,35 @@
 import { action } from "typesafe-actions";
-import { IStudentRaw, StudentActionTypes } from "state/ducks/students/types";
+import { IRegistrationRaw, StudentActionTypes } from "state/ducks/students/types";
 
-export const fetchStudents = () => {
+export const fetchRegistrations = () => {
   return action(StudentActionTypes.FETCH_STUDENTS, [], {
     method: "get",
-    route: "/students",
+    route: "/registration",
   });
 };
-export const fetchStudentsSuccess = (data: IStudentRaw[]) =>
+export const fetchStudentsSuccess = (data: IRegistrationRaw[]) =>
   action(StudentActionTypes.FETCH_STUDENTS_SUCCESS, data);
 export const fetchStudentsError = (message: string) =>
   action(StudentActionTypes.FETCH_STUDENTS_ERROR, message);
 
-export const addStudent = (payload: IStudentRaw) => {
+export const addStudent = (payload: IRegistrationRaw) => {
   return action(StudentActionTypes.ADD_STUDENT, payload, {
     method: "post",
-    route: "/students",
+    route: "/registration",
   });
 };
-export const addStudentSuccess = (data: IStudentRaw) =>
+export const addStudentSuccess = (data: IRegistrationRaw) =>
   action(StudentActionTypes.ADD_STUDENT_SUCCESS, data);
 export const addStudentError = (message: string) =>
   action(StudentActionTypes.ADD_STUDENT_ERROR, message);
 
-export const updateStudent = (data: IStudentRaw) => {
+export const updateStudent = (data: IRegistrationRaw) => {
   return action(StudentActionTypes.UPDATE_STUDENT, data, {
     method: "put",
     route: `/students/${data?._id}`,
   });
 };
-export const updateStudentSuccess = (data: IStudentRaw) =>
+export const updateStudentSuccess = (data: IRegistrationRaw) =>
   action(StudentActionTypes.UPDATE_STUDENT_SUCCESS, data);
 export const updateStudentError = (message: string) =>
   action(StudentActionTypes.UPDATE_STUDENT_ERROR, message);

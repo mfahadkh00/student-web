@@ -1,16 +1,61 @@
 export interface IStudentState {
-  readonly data: IStudentRaw[];
-  readonly loading: boolean;
-  readonly errors: [];
+  data: IRegistrationRaw[] | IStudentRaw[]; //TODO: change to IStudentRaw[]
+  loading: boolean;
+  error: string | null | string[];
 }
 export type ApiResponse = Record<string, any>;
 export interface IStudentRaw extends ApiResponse {
   // _id: string | null;
-  name: string;
-  subject: string;
-  marks: number;
-  grade: string;
+  name?: string;
+  roll_number?: string;
+  email?: string;
+  phone?: string;
   // timestamp: string | null;
+}
+export type RegistrationState = {
+  data: IRegistrationRaw[];
+  loading: boolean;
+  errors: string[];
+};
+
+// export interface IMarks{
+//   title?: string;
+//   marks?: number;
+//   totalMarks?: number;
+//   grade?: string;
+//   subject?: string;
+//   _id?: string;
+// }
+
+export interface IMark {
+  title: "Quiz" | "Midterm" | "Assignment" | "Final";
+  obtainedMarks?: number;
+  totalMarks?: number;
+}
+export interface IRegistrationRaw {
+  student?: IStudentRaw;
+  subject?: ISubjectRaw;
+  marks: IMark[] | undefined;
+  //  {
+  //   title: "Quiz" | "Midterm" | "Assignment" | "Final";
+  //   obtainedMarks?: number;
+  //   totalMarks?: number;
+  // }[];
+  grade?: string;
+  grandTotal?: number;
+  // _id: string;
+  title?: string;
+  singleMark?: number;
+  totalMarks?: number;
+  // grade?: string;
+  singleSubject?: string;
+  _id: string;
+  roll_number?: string;
+}
+
+export interface ISubjectRaw {
+  name: string;
+  _id: string;
 }
 export const StudentActionTypes = {
   FETCH_STUDENTS: "@@student/FETCH_STUDENTS",

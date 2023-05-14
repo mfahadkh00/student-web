@@ -15,20 +15,20 @@ import {
   deleteStudent,
   deleteStudentError,
   deleteStudentSuccess,
-  fetchStudents,
+  fetchRegistrations,
   fetchStudentsError,
   fetchStudentsSuccess,
   updateStudent,
   updateStudentError,
   updateStudentSuccess,
 } from "state/ducks/students/actions";
-import { IStudentRaw, StudentActionTypes } from "state/ducks/students/types";
+import { IRegistrationRaw, StudentActionTypes } from "state/ducks/students/types";
 
 function* handleStudentFetch(
-  action: ActionType<typeof fetchStudents>
+  action: ActionType<typeof fetchRegistrations>
 ): Generator {
   try {
-    const res: IStudentRaw[] | any = yield call(
+    const res: IRegistrationRaw[] | any = yield call(
       apiCaller,
       action.meta.method,
       action.meta.route
@@ -60,7 +60,7 @@ function* handleStudentDelete(
 }
 function* handleStudentAdd(action: ActionType<typeof addStudent>): Generator {
   try {
-    const res: IStudentRaw | any = yield call(
+    const res: IRegistrationRaw | any = yield call(
       apiCaller,
       action.meta.method,
       action.meta.route,
@@ -81,7 +81,7 @@ function* handleStudentUpdate(
 ): Generator {
   try {
     const payload = { ...action.payload };
-    delete payload._id;
+    // delete payload._id;
     yield call(apiCaller, action.meta.method, action.meta.route, payload);
 
     yield put(updateStudentSuccess(action.payload));

@@ -4,7 +4,7 @@ import { deleteStudent } from "state/ducks/students/actions";
 import SingleRecord from "components/marksView/SingleRecord";
 
 const mapDispatchToProps = {
-  deleteStudent,
+  // deleteStudent,
 };
 
 export default connect(null, mapDispatchToProps)(SingleRecord);

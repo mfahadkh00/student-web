@@ -5,10 +5,10 @@ import { deleteStudent } from "state/ducks/students/actions";
 import { DELETE_ICON, EDIT_ICON } from "utils";
 type SingleRecordProps = {
   handleEdit: () => void;
-  handleDelete: () => ActionType<typeof deleteStudent>;
+  handleDelete: () => void;
 };
-
-const DropdownMenu = ({ handleEdit, handleDelete }: SingleRecordProps) => {
+// 
+const DropdownMenu = ({ handleDelete, handleEdit }: SingleRecordProps) => {
   return (
     <div className="dropdown dropdown ms-5">
       <button
@@ -23,9 +23,13 @@ const DropdownMenu = ({ handleEdit, handleDelete }: SingleRecordProps) => {
 
       <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <div>
-          <div className="dropdown-item" onClick={() => handleEdit()}>
+          {/* <div className="dropdown-item" onClick={() => handleEdit()}>
             <img src={EDIT_ICON} alt="Edit Student" className="img-icon" />
             Edit
+          </div> */}
+          <div className="dropdown-item" onClick={() => handleEdit()}>
+            <img src={EDIT_ICON} alt="Edit Student" className="img-icon" />
+            Manage Evaluation
           </div>
           <div className="dropdown-item" onClick={() => handleDelete()}>
             <img src={DELETE_ICON} className="img-icon" alt="Delete Student" />

@@ -9,34 +9,42 @@ import { MODAL_TYPE } from "utils/enums";
 import InputTextField from "components/marksInputModal/inputTextField";
 import InputSelectField from "components/marksInputModal/inputSelect";
 import { grades, subjects } from "utils/index";
-import { IStudentRaw } from "state/ducks/students/types";
+import { IRegistrationRaw, IStudentRaw } from "state/ducks/students/types";
 import { ActionType } from "typesafe-actions";
 import { addStudent, updateStudent } from "state/ducks/students/actions";
+import { addRegistration } from "state/ducks/registrations/registrationActions";
+import { useAppDispatch } from "state/hooks";
 interface IModalProps {
   visible: boolean;
   setVisible: (x: boolean) => void;
-  addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
-  updateStudent: (payload: IStudentRaw) => ActionType<typeof updateStudent>;
-  studentData: IStudentRaw;
-  setStudentData: (std: IStudentRaw | null) => void;
+  addStudent: (payload: IRegistrationRaw) => ActionType<typeof addStudent>;
+  updateStudent: (
+    payload: IRegistrationRaw
+  ) => ActionType<typeof updateStudent>;
+  studentData: IRegistrationRaw;
+  setStudentData: (std: IRegistrationRaw | null) => void;
+  students: IStudentRaw[];
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
   const blankForm = {
-    name: "",
-    marks: 0,
-    subject: "",
-    grade: "",
+    // title: "",
+    // singleMark: 0,
+    // totalMarks: 0,
+    singleSubject: "",
+    // grade: "",
+    roll_number: "",
   };
 
   const modalType = props?.studentData?._id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
+  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm<IStudentRaw>({
+  } = useForm<IRegistrationRaw>({
     mode: "onTouched",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
@@ -44,33 +52,31 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
       return props.studentData || blankForm;
     }, [props.studentData]),
   });
+  // console.log(errors);
 
   useEffect(() => {
     reset(props.studentData);
   }, [props.studentData]);
 
-  const onSubmit = (values: IStudentRaw) => {
+  const onSubmit = (values: IRegistrationRaw) => {
     reset(blankForm);
-    const date = new Date();
-    const formattedDate = date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-    const formattedTime = date.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
+    console.log("values", values);
     if (modalType === MODAL_TYPE.EDIT) {
       props.updateStudent({
         ...values,
         _id: props?.studentData._id,
-        date: formattedDate,
-        time: formattedTime,
+        // date: formattedDate,
+        // time: formattedTime,
       });
     } else {
-      props.addStudent({ ...values, date: formattedDate, time: formattedTime });
+      const subjID = subjects.find((s) => s.name === values.singleSubject)?._id;
+      const student = props.students.find((s) => s.roll_number === values.roll_number)?._id;
+      dispatch(addRegistration(student,subjID))
+      
+      // props.addStudent({
+      //   ...values,
+      //   // date: formattedDate, time: formattedTime
+      // });
     }
     props.setStudentData(null);
     props.setVisible(false);
@@ -92,27 +98,40 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{modalType} Student Data</Modal.Title>
+          <Modal.Title>{modalType} Student Registration</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
+            {/* <Controller
               control={control}
-              name="name"
+              name="title"
               render={({ field }) => (
                 <InputTextField
                   {...field}
-                  fieldLabel="Name"
+                  fieldLabel="Roll Number"
                   errors={errors}
-                  placeholder="Enter name"
+                  placeholder="Enter Roll Number"
                   type="text"
                 />
               )}
-            />
-
+            /> */}
             <Controller
               control={control}
-              name="marks"
+              name="roll_number"
+              render={({ field }) => (
+                <InputSelectField
+                  {...field}
+                  fieldLabel="Roll Number"
+                  errors={errors}
+                  data={
+                    props.students?.map((itx) => itx.roll_number) as string[]
+                  }
+                />
+              )}
+            />
+            {/* <Controller
+              control={control}
+              name="singleMark"
               render={({ field }) => (
                 <InputTextField
                   {...field}
@@ -122,22 +141,22 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
                   type="number"
                 />
               )}
-            />
+            /> */}
 
             <Controller
               control={control}
-              name="subject"
+              name="singleSubject"
               render={({ field }) => (
                 <InputSelectField
                   {...field}
                   fieldLabel="Subject"
                   errors={errors}
-                  data={subjects}
+                  data={subjects.map((itx) => itx.name)}
                 />
               )}
             />
 
-            <Controller
+            {/* <Controller
               control={control}
               name="grade"
               render={({ field }) => (
@@ -148,7 +167,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
                   data={grades}
                 />
               )}
-            />
+            /> */}
             <FormButtonGroup mode={modalType} handleClose={handleClose} />
           </Form>
         </Modal.Body>

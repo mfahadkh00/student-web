@@ -27,13 +27,13 @@ const StudentDetails = (props: IProps) => {
           <Col> Action </Col>
         </Row>
         <hr style={{ borderColor: "gray" }} />
-        {props?.studentList?.map((student: IStudentRaw, key) => (
+        {/* {props?.studentList?.map((student: IStudentRaw, key) => (
           <SingleRecordContainer
             student={student}
             key={key}
-            handleEdit={() => handleEdit(student)}
+            // handleEdit={() => handleEdit(student)}
           />
-        ))}
+        ))} */}
       </>
     </Container>
   );

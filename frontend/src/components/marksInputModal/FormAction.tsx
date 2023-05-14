@@ -13,7 +13,11 @@ const FormButtonGroup: React.FC<IFormButtonProps> = (props) => {
       <Button className="btn-inputCancel" onClick={() => props.handleClose()}>
         Close
       </Button>
-      <Button className="btn-inputSuccess" type="submit">
+      <Button
+        className="btn-inputSuccess"
+        type="submit"
+        onClick={() => console.log("clicked")}
+      >
         {props?.mode}
       </Button>
     </div>

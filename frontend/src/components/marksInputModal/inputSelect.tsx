@@ -5,8 +5,8 @@ interface ITextField {
   fieldLabel: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
-  data: string[];
+  value?: string;
+  data: string[] | undefined[];
 }
 const InputSelectField: React.FC<ITextField> = (props) => {
   return (

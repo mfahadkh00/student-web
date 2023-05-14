@@ -33,7 +33,7 @@ router.post('/batch', async (req, res) => {
         }
   
         // Check if attendance record already exists for this student and date
-        const existingAttendance = await Attendance.findOne({ student_id: student._id, subject_id: subject._id, date: req.body.date });
+        const existingAttendance = await Attendance.findOne({ roll_no: student._id, subject_id: subject._id, date: req.body.date });
         if (existingAttendance) {
           console.log(`Attendance record already exists for student ${student.name} on ${req.body.date}`);
           continue;
@@ -41,7 +41,7 @@ router.post('/batch', async (req, res) => {
   
         // Create new attendance record
         const attendance = new Attendance({
-          student_id: student._id,
+          roll_no: student._id,
           subject_id: subject._id,
           date: req.body.date,
           is_present: true
@@ -59,7 +59,7 @@ router.post('/batch', async (req, res) => {
         }
   
         // Check if attendance record already exists for this student and date
-        const existingAttendance = await Attendance.findOne({ student_id: student._id, subject_id: subject._id, date: req.body.date });
+        const existingAttendance = await Attendance.findOne({ roll_no: student._id, subject_id: subject._id, date: req.body.date });
         if (existingAttendance) {
           console.log(`Attendance record already exists for student ${student.name} on ${req.body.date}`);
           continue;
@@ -67,7 +67,7 @@ router.post('/batch', async (req, res) => {
   
         // Create new attendance record
         const attendance = new Attendance({
-          student_id: student._id,
+          roll_no: student._id,
           subject_id: subject._id,
           date: req.body.date,
           is_present: false
@@ -116,7 +116,7 @@ router.get('/date-sub/:subject/:date', async (req, res) => {
     const attendance = await Attendance.find({
       subject_id: subjectId,
       date: date,
-    }).populate('student_id', 'roll_number name');
+    }).populate('roll_no', 'roll_number name');
 
     res.status(200).json({ attendance });
   } catch (err) {
@@ -133,7 +133,7 @@ router.get('/subject/:subject', async (req, res) => {
 
     const attendance = await Attendance.find({
       subject_id: subjectId,
-    }).populate('student_id', 'roll_number name');
+    }).populate('roll_no', 'roll_number name');
 
     res.status(200).json({ attendance });
   } catch (err) {
@@ -149,7 +149,7 @@ router.get('/date/:date', async (req, res) => {
 
     const attendance = await Attendance.find({
       date: date,
-    }).populate('student_id', 'roll_number name').populate('subject_id', 'name');
+    }).populate('roll_no', 'roll_number name').populate('subject_id', 'name');
 
     res.status(200).json({ attendance });
   } catch (err) {

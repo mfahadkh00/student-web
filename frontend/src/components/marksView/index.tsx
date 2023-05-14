@@ -2,24 +2,33 @@ import StudentSummary from "components/marksView/StudentSummary";
 import { useEffect, useState } from "react";
 import React from "react";
 import "components/marksView/styles.css";
-import { IStudentRaw, IStudentState } from "state/ducks/students/types";
+import { IRegistrationRaw } from "state/ducks/students/types";
 import Header from "components/marksView/header";
-import { ActionType } from "typesafe-actions";
-import { fetchStudents } from "state/ducks/students/actions";
 import { ISummaryData } from "utils";
 import InputModalContainer from "containers/marksInputModalContainer";
 import StudentDetailsContainer from "containers/studentDetailsContainer";
-interface IProps extends IStudentState {
-  fetchStudents: () => ActionType<typeof fetchStudents>;
-  dashboardData: ISummaryData;
+import { useAppDispatch } from "state/hooks";
+import { fetchRegistrations } from "state/ducks/registrations/registrationActions";
+import { IRegistrationState } from "state/ducks/registrations/registrationSlice";
+import { fetchStudentsX } from "state/ducks/students/studentSlice";
+import ResultModal from "./marksModal";
+interface IProps extends IRegistrationState {
+  // fetchRegistrations: () => Promise<void>;
+  dashboardData?: ISummaryData;
+  error?: string | null;
 }
-
-const MainView: React.FC<IProps> = ({ fetchStudents, dashboardData }) => {
+// fetchRegistrations
+const MainView: React.FC<IProps> = ({ dashboardData }) => {
   const [show, setShow] = useState(false);
-  const [studentData, setStudentData] = useState<IStudentRaw | null>();
+  const [marksModal, setMarksModal] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const [studentData, setStudentData] = useState<IRegistrationRaw | null>();
+  console.log("studentData", studentData);
   useEffect(() => {
-    fetchStudents();
-  }, [fetchStudents]);
+    dispatch(fetchRegistrations());
+    dispatch(fetchStudentsX());
+  }, []);
 
   return (
     <>
@@ -28,13 +37,15 @@ const MainView: React.FC<IProps> = ({ fetchStudents, dashboardData }) => {
       <StudentDetailsContainer
         setStudentData={setStudentData}
         setShow={setShow}
+        setMarksModal={setMarksModal}
       />
       <InputModalContainer
         visible={show}
         setVisible={setShow}
         setStudentData={setStudentData}
-        studentData={studentData as IStudentRaw}
+        studentData={studentData as IRegistrationRaw}
       />
+      <ResultModal records={studentData as any} show={marksModal} setShow={setMarksModal} />
     </>
   );
 };

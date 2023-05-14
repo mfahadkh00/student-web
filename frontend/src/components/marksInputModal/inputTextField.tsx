@@ -5,7 +5,7 @@ interface ITextField {
     fieldLabel:string,
     name:string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    value:string | number,
+    value?:string | number,
     placeholder:string,
     type:string
 }

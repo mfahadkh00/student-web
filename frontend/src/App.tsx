@@ -1,16 +1,14 @@
 import React from "react";
 import { Provider } from "react-redux";
 import "App.css";
-import configureAppStore from "state";
 import MainViewContainer from "containers/marksViewContainer";
 import AttendanceViewContainer from "containers/attendanceViewContainer";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "components/privateRoute";
 import SignIn from "components/signin";
 import Layout from "components/layout";
+import store from "../src/state/store";
 
-const initialState = (window as any).initialReduxState;
-const store = configureAppStore(initialState);
 function App() {
   return (
     <Provider store={store}>
@@ -21,7 +19,7 @@ function App() {
             <PrivateRoute
               outlet={
                 <Layout>
-                  <AttendanceViewContainer />{" "}
+                  {/* <AttendanceViewContainer />{" "} */}
                 </Layout>
               }
             />
@@ -34,7 +32,7 @@ function App() {
             <PrivateRoute
               outlet={
                 <Layout>
-                  <MainViewContainer />{" "}
+                  <MainViewContainer />
                 </Layout>
               }
             />

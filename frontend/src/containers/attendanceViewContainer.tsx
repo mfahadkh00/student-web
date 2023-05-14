@@ -1,19 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { IApplicationState } from "state/ducks/index";
-import { fetchStudents } from "state/ducks/students/actions";
-import { getSummaryData } from "state/ducks/students/reselectors";
+import { IApplicationState2 } from "state/ducks/index";
+import { fetchRegistrations } from "state/ducks/students/actions";
+// import { getSummaryData } from "state/ducks/students/reselectors";
 import AttendanceView from "components/attendanceView";
 
-const mapStateToProps = (state: IApplicationState) => ({
-  loading: state.students.loading,
-  errors: state.students.errors,
-  data: state.students.data,
-  dashboardData: getSummaryData(state),
+const mapStateToProps = (state: IApplicationState2) => ({
+  // loading: state.students.loading,
+  // errors: state.students.error,
+  // data: state.students.data,
+  // dashboardData: getSummaryData(state),
 });
 
 const mapDispatchToProps = {
-  fetchStudents,
+  // fetchRegistrations,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AttendanceView);
+export default <h1>hello</h1>;
+// connect(mapStateToProps, mapDispatchToProps)(AttendanceView);

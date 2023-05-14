@@ -1,19 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import MainView from "components/marksView";
-import { IApplicationState } from "state/ducks/index";
-import { fetchStudents } from "state/ducks/students/actions";
-import { getSummaryData } from "state/ducks/students/reselectors";
+import { fetchRegistrations } from "state/ducks/registrations/registrationActions";
+import { IApplicationState } from "state/store";
+// import { getSummaryData } from "state/ducks/students/reselectors";
 
 const mapStateToProps = (state: IApplicationState) => ({
-  loading: state.students.loading,
-  errors: state.students.errors,
-  data: state.students.data,
-  dashboardData: getSummaryData(state),
+  loading: state.registrations?.loading,
+  errors: state.registrations?.error,
+  registrations: state.registrations?.registrations,
+  // dashboardData: getSummaryData(state),
 });
 
 const mapDispatchToProps = {
-  fetchStudents,
+  fetchRegistrations,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);

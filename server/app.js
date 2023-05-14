@@ -3,16 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 
 // var indexRouter = require('./routes/index');
 var studentRouter = require('./route/student');
 var subjectRouter = require('./route/subject');
 var teacherRouter = require('./route/teacher');
-var marksRouter = require('./route/marks');
+var registrationRouter = require('./route/registration');
 var attendanceRouter = require('./route/attendance');
 
 
 var app = express();
+app.use(cors());
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/students', studentRouter);
 app.use('/subjects', subjectRouter);
 app.use('/teachers', teacherRouter);
-app.use('/marks', marksRouter);
+app.use('/registration', registrationRouter);
 app.use('/attendance', attendanceRouter);
 
 // catch 404 and forward to error handler

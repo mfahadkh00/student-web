@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   });
 
 // GET all subjects
-router.get('/subjects', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const subjects = await Subject.find();
       res.json(subjects);
