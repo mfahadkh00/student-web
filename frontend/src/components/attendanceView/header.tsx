@@ -7,11 +7,11 @@ interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = (props) => {
   return (
     <>
-      <div className="main-heading">Student Portal</div>
-      <hr style={{ borderColor: "gray" }} />
+      {/* <div className="main-heading">Student Portal</div> */}
+      {/* <hr style={{ borderColor: "gray" }} /> */}
       <Stack
         direction="horizontal"
-        style={{ justifyContent: "space-between", margin: "20px" }}
+        style={{ justifyContent: "space-between", margin: "5px" }}
       >
         <div className="sub-heading">Attendance Summary</div>
         <div className="ml-auto">
@@ -20,7 +20,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
             style={{ float: "right", marginRight: "200px" }}
             onClick={() => props.setShow(true)}
           >
-            + Add Data
+            + Add Attendance
           </button>
         </div>
       </Stack>

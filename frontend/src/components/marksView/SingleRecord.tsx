@@ -15,16 +15,16 @@ type SingleRecordProps = {
 const SingleRecord = ({
   student,
   handleEdit,
-  // deleteStudent,
-}: SingleRecordProps) => {
-  const dispatch=useAppDispatch();
+}: // deleteStudent,
+SingleRecordProps) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       <Row style={{ marginTop: "20px" }}>
         <Col> {student?.student?.name} </Col>
         <Col> {student?.student?.roll_number} </Col>
         <Col> {student?.subject?.name} </Col>
-        <Col> {student?.grandTotal} </Col>
+        <Col> {student?.grandTotal || 0}% </Col>
         <Col>
           <div className={`gradeBox grade${student.grade}`}>
             {student?.grade}

@@ -16,7 +16,7 @@ const FormButtonGroup: React.FC<IFormButtonProps> = (props) => {
       <Button
         className="btn-inputSuccess"
         type="submit"
-        onClick={() => console.log("clicked")}
+        
       >
         {props?.mode}
       </Button>

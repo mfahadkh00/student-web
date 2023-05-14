@@ -3,6 +3,7 @@ import { Button, Modal, Table, Form } from "react-bootstrap";
 import { updateRegistration } from "state/ducks/registrations/registrationActions";
 import { IMark, IRegistrationRaw } from "state/ducks/students/types";
 import { useAppDispatch } from "state/hooks";
+import { evaluations, subjects } from "utils";
 
 interface IModalProps {
   records: IRegistrationRaw | undefined;
@@ -26,7 +27,7 @@ const ResultModal: React.FC<IModalProps> = ({ records, show, setShow }) => {
     dispatch(
       updateRegistration(records?._id, title, obtainedMarks, totalMarks)
     );
-    handleClose()
+    handleClose();
     setTitle("");
     setObtainedMarks(0);
     setTotalMarks(0);
@@ -60,11 +61,15 @@ const ResultModal: React.FC<IModalProps> = ({ records, show, setShow }) => {
             <Form.Group controlId="title">
               <Form.Label>Evaluation Type</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter title"
+                as="select"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-              />
+              >
+                <option value="">Select Evaluation Type</option>
+                {evaluations?.map((itx) => (
+                  <option value={itx}>{itx}</option>
+                ))}
+              </Form.Control>
             </Form.Group>
             <Form.Group controlId="obtainedMarks">
               <Form.Label>Obtained Marks</Form.Label>

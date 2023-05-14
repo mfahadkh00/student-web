@@ -2,12 +2,12 @@ import React from "react";
 import { Provider } from "react-redux";
 import "App.css";
 import MainViewContainer from "containers/marksViewContainer";
-import AttendanceViewContainer from "containers/attendanceViewContainer";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "components/privateRoute";
 import SignIn from "components/signin";
 import Layout from "components/layout";
 import store from "../src/state/store";
+import AttendanceView from "components/attendanceView";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <PrivateRoute
               outlet={
                 <Layout>
-                  {/* <AttendanceViewContainer />{" "} */}
+                  <AttendanceView />
                 </Layout>
               }
             />

@@ -7,7 +7,7 @@ export type ApiResponse = Record<string, any>;
 export interface IStudentRaw extends ApiResponse {
   // _id: string | null;
   name?: string;
-  roll_number?: string;
+  roll_number: string;
   email?: string;
   phone?: string;
   // timestamp: string | null;
@@ -18,23 +18,14 @@ export type RegistrationState = {
   errors: string[];
 };
 
-// export interface IMarks{
-//   title?: string;
-//   marks?: number;
-//   totalMarks?: number;
-//   grade?: string;
-//   subject?: string;
-//   _id?: string;
-// }
-
 export interface IMark {
   title: "Quiz" | "Midterm" | "Assignment" | "Final";
   obtainedMarks?: number;
   totalMarks?: number;
 }
 export interface IRegistrationRaw {
-  student?: IStudentRaw;
-  subject?: ISubjectRaw;
+  student: IStudentRaw;
+  subject: ISubjectRaw;
   marks: IMark[] | undefined;
   //  {
   //   title: "Quiz" | "Midterm" | "Assignment" | "Final";
@@ -50,9 +41,15 @@ export interface IRegistrationRaw {
   // grade?: string;
   singleSubject?: string;
   _id: string;
-  roll_number?: string;
+  roll_number: string;
 }
-
+export interface IAttendanceRaw {
+  subject_id: ISubjectRaw;
+  date: string;
+  is_present: boolean;
+  roll_no:IStudentRaw;
+  // _id:string
+}
 export interface ISubjectRaw {
   name: string;
   _id: string;

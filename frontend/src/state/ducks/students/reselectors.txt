@@ -1,7 +1,7 @@
-import { createSelector } from "reselect";
-import { ISummaryData, subjects } from "utils";
-import { IApplicationState2 } from "..";
-import { IRegistrationRaw } from "./types";
+// import { createSelector } from "reselect";
+// import { ISummaryData, subjects } from "utils";
+// import { IApplicationState2 } from "..";
+// import { IRegistrationRaw } from "./types";
 
 // const getStudent = (state: IApplicationState) => state.students.data;
 // export const getSummaryData = createSelector(

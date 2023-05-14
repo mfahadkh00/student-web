@@ -36,7 +36,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     roll_number: "",
   };
 
-  const modalType = props?.studentData?._id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
+  const modalType = MODAL_TYPE.ADD;
   const dispatch = useAppDispatch();
 
   const {
@@ -61,23 +61,18 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
   const onSubmit = (values: IRegistrationRaw) => {
     reset(blankForm);
     console.log("values", values);
-    if (modalType === MODAL_TYPE.EDIT) {
-      props.updateStudent({
-        ...values,
-        _id: props?.studentData._id,
-        // date: formattedDate,
-        // time: formattedTime,
-      });
-    } else {
-      const subjID = subjects.find((s) => s.name === values.singleSubject)?._id;
-      const student = props.students.find((s) => s.roll_number === values.roll_number)?._id;
-      dispatch(addRegistration(student,subjID))
-      
-      // props.addStudent({
-      //   ...values,
-      //   // date: formattedDate, time: formattedTime
-      // });
-    }
+
+    const subjID = subjects.find((s) => s.name === values.singleSubject)?._id;
+    const student = props.students.find(
+      (s) => s.roll_number === values.roll_number
+    )?._id;
+    dispatch(addRegistration(student, subjID));
+
+    // props.addStudent({
+    //   ...values,
+    //   // date: formattedDate, time: formattedTime
+    // });
+
     props.setStudentData(null);
     props.setVisible(false);
   };

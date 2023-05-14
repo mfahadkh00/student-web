@@ -17,7 +17,7 @@ const SignIn: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // const dispatch = useAppDispatch();
-  const isAuth = false;//= useAppSelector((state) => state.auth.isAuthenticated);
+  const isAuth = localStorage.getItem("isAuth");//= useAppSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const SignIn: React.FC = () => {
 
   const handleLogin = () => {
     navigate("/");
+    localStorage.setItem('isAuth', 'true');
     // dispatch(userLogin({ username: username, password: password }));
   };
 
@@ -43,7 +44,7 @@ const SignIn: React.FC = () => {
         <SignInPaper elevation={3}>
           <Logo src={logoImg} alt="Logo" />
           <Typography component="h1" variant="h5" align="center">
-            Dummy Sign In
+            Sign In
           </Typography>
           <form noValidate>
             <TextField

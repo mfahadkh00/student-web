@@ -74,6 +74,14 @@
   letter-spacing: 0%;
   text-align: left;
 }
+.present {
+  background-color: #4bab9a;
+  color: #ffffff;
+}
+.absent {
+  background-color: rgba(255, 104, 151, 0.5);
+  color: #ff3e00;
+}
 .gradeA {
   background-color: #4bab9a;
   color: #ffffff;

@@ -1,20 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
 import "./global.d.ts";
-import { IStudentState, RegistrationState } from "state/ducks/students/types.js";
+import {
+  IStudentState,
+  RegistrationState,
+} from "state/ducks/students/types.js";
 import studentReducer from "state/ducks/students/studentSlice";
-import registrationReducer, { IRegistrationState } from "state/ducks/registrations/registrationSlice";   
+import registrationReducer, {
+  IRegistrationState,
+} from "state/ducks/registrations/registrationSlice";
+import attendanceReducer, { IAttendanceState } from "./ducks/attendance/attendanceSlice";
 
 export interface IApplicationState {
   registrations: IRegistrationState;
   students: IStudentState;
-  //   auth: AuthState;
-  //   profile: ProfileState;
+  attendace: IAttendanceState;
+
 }
 
 const store = configureStore({
   reducer: {
     registrations: registrationReducer,
-    students:studentReducer
+    students: studentReducer,
+    attendance: attendanceReducer,
     // auth: authSlice,
     // profile: profileSlice,
   },

@@ -16,5 +16,5 @@ const mapDispatchToProps = {
   // fetchRegistrations,
 };
 
-export default <h1>hello</h1>;
-// connect(mapStateToProps, mapDispatchToProps)(AttendanceView);
+//  <h1>hello</h1>;
+export default connect(mapStateToProps, mapDispatchToProps)(AttendanceView);

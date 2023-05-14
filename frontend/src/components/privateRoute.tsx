@@ -8,7 +8,8 @@ export type ProtectedRouteProps = {
   };
 
 export default function PrivateRoute({ outlet }: ProtectedRouteProps) {
-  const isAuthenticated = true;
+  const isAuthenticated = Boolean(localStorage.getItem('isAuth'));
+  console.log("🚀 ~ file: privateRoute.tsx:12 ~ PrivateRoute ~ isAuthenticated:", isAuthenticated)
   // = useAppSelector(
   //   (state: IApplicationState) => state.auth.isAuthenticated
   // );
